@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+  --font-display: var(--font-playfair), serif;
+  --font-cursive: var(--font-cursive), cursive;
+  --font-signature: var(--font-signature), cursive;
+  
+  /* Deepened Warm Premium Light Palette */
+  --color-ivory: #FFFDFA;
+  --color-cream: #F9F6F1;
+  --color-taupe: #3D3834; /* Darker for better contrast */
+  --color-muted-gold: #B58B43; /* Richer gold */
+  --color-blush: #F7E7E3;
+  --color-sage: #E2E4D8;
+  --color-peach: #FCECE4;
+}
+
+@layer base {
+  body {
+    @apply bg-ivory text-taupe antialiased selection:bg-blush selection:text-taupe;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    @apply font-display;
+  }
+
+  .font-cursive {
+    @apply font-cursive;
+  }
+
+  .font-signature {
+    @apply font-signature;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-2xl bg-white/40 border border-white/60 shadow-[0_20px_50px_rgba(92,84,78,0.05)];
+  }
+
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-taupe via-muted-gold to-taupe;
+  }
+
+  .glow-soft {
+    @apply shadow-[0_0_40px_-10px_rgba(197,160,89,0.3)];
+  }
+
+  .grain {
+    @apply fixed inset-0 pointer-events-none z-[9999] opacity-[0.02];
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    filter: contrast(120%) brightness(120%);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes drift {
+    0% { transform: translate(0, 0) rotate(0); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.6; }
+    100% { transform: translate(100px, -100vh) rotate(360deg); opacity: 0; }
+  }
+
+  .petal {
+    @apply absolute w-4 h-4 bg-blush/40 rounded-full blur-[1px] pointer-events-none;
+    animation: drift 15s linear infinite;
+  }
+}
+
+/* Luxury Slider - Soft & Clean */
+input[type="range"]::-webkit-slider-runnable-track {
+  @apply h-2 bg-peach rounded-full;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @apply appearance-none w-8 h-8 bg-white rounded-full border-2 border-muted-gold shadow-xl cursor-pointer -translate-y-1/2 transition-transform hover:scale-110 active:scale-95;
+}

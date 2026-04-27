@@ -47,7 +47,7 @@ const InsightSection = ({
       
       <motion.div 
         style={{ opacity, scale, y }}
-        className="relative z-10 text-center max-w-5xl px-6 w-full"
+        className="relative z-10 text-center max-w-none px-24 w-full"
       >
         <div className="flex flex-col items-center gap-16 md:gap-24">
           <motion.div

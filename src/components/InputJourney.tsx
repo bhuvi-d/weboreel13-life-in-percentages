@@ -74,7 +74,7 @@ const HabitSlider = ({
   const lifetime = calculateLifetimeStats(value, 80);
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-12 relative">
+    <div className="w-full max-w-5xl mx-auto space-y-12 relative">
       <SparkleBurst trigger={sparkleTrigger} />
       
       <div className="flex flex-col items-center text-center space-y-8">
@@ -202,7 +202,7 @@ export const InputJourney = () => {
         ))}
       </div>
 
-      <div className="w-full max-w-4xl px-6 relative z-10">
+      <div className="w-full max-w-none px-20 relative z-10">
         <AnimatePresence mode="wait">
           <motion.div
             key={step}
@@ -221,7 +221,7 @@ export const InputJourney = () => {
 
             <div className="w-full">
               {step === 0 ? (
-                <div className="w-full max-w-xl mx-auto p-20 rounded-[4.5rem] glass space-y-12 text-center relative overflow-hidden">
+                <div className="w-full max-w-4xl mx-auto p-20 rounded-[4.5rem] glass space-y-12 text-center relative overflow-hidden">
                    <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-peach via-muted-gold to-peach" />
                   <motion.div 
                     key={lifespan}

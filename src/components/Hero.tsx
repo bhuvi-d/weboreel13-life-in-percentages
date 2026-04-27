@@ -38,7 +38,7 @@ export const Hero = () => {
           </h1>
         </div>
 
-        <p className="max-w-xl mx-auto text-xl md:text-2xl font-display text-taupe/50 italic leading-relaxed">
+        <p className="max-w-3xl mx-auto text-xl md:text-2xl font-display text-taupe/50 italic leading-relaxed">
           Your days are becoming years. <br />
           Discover the beautiful reflection of where your time goes.
         </p>

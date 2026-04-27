@@ -30,20 +30,20 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
     masterGain.connect(ctx.destination);
     masterGainRef.current = masterGain;
 
-    // "THE WARMTH" - Friendly Organic Beat
+    // "THE JOY" - Brighter, Happier Beat
     let beatCount = 0;
     const playPattern = () => {
       if (ctx.state === "suspended") return;
       
       const time = ctx.currentTime;
       
-      // 1. SOFT KICK (Beats 1 and 3)
+      // 1. PUNCHIER KICK (Beats 1 and 3)
       if (beatCount % 4 === 0 || beatCount % 4 === 2) {
         const kickOsc = ctx.createOscillator();
         const kickGain = ctx.createGain();
-        kickOsc.frequency.setValueAtTime(100, time);
-        kickOsc.frequency.exponentialRampToValueAtTime(40, time + 0.1);
-        kickGain.gain.setValueAtTime(0.15, time);
+        kickOsc.frequency.setValueAtTime(120, time);
+        kickOsc.frequency.exponentialRampToValueAtTime(50, time + 0.1);
+        kickGain.gain.setValueAtTime(0.3, time); // Louder
         kickGain.gain.exponentialRampToValueAtTime(0.001, time + 0.3);
         kickOsc.connect(kickGain);
         kickGain.connect(masterGain);
@@ -51,11 +51,11 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
         kickOsc.stop(time + 0.3);
       }
 
-      // 2. SOFT SHAKER (Off-beats)
+      // 2. BRIGHT SHAKER (Off-beats)
       if (beatCount % 2 === 1) {
         const shakerGain = ctx.createGain();
-        shakerGain.gain.setValueAtTime(0.015, time);
-        shakerGain.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
+        shakerGain.gain.setValueAtTime(0.03, time); // Louder
+        shakerGain.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
         
         const bufferSize = ctx.sampleRate * 0.1;
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
@@ -68,24 +68,38 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
         noise.start(time);
       }
 
-      // 3. WARM PAD (Acoustic Guitar Style Pluck)
+      // 3. HAPPY CHORDS (C Major / F Major)
       if (beatCount % 8 === 0) {
-        const notes = [220, 261, 196, 174]; // A3, C4, G3, F3
+        const notes = [261.63, 329.63, 392.00, 349.23]; // C4, E4, G4, F4
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        osc.type = "triangle";
+        osc.type = "sine"; // Warmer, happier sine wave
         osc.frequency.setValueAtTime(notes[Math.floor(beatCount / 8) % 4], time);
         gain.gain.setValueAtTime(0, time);
-        gain.gain.linearRampToValueAtTime(0.04, time + 0.5);
-        gain.gain.linearRampToValueAtTime(0, time + 2);
+        gain.gain.linearRampToValueAtTime(0.08, time + 0.2); // Faster attack
+        gain.gain.linearRampToValueAtTime(0, time + 1.5);
         osc.connect(gain);
         gain.connect(masterGain);
         osc.start(time);
-        osc.stop(time + 2);
+        osc.stop(time + 1.5);
+      }
+
+      // 4. BRIGHT POP (Every 4th beat)
+      if (beatCount % 4 === 1) {
+        const popOsc = ctx.createOscillator();
+        const popGain = ctx.createGain();
+        popOsc.frequency.setValueAtTime(880, time); // A5
+        popOsc.frequency.exponentialRampToValueAtTime(440, time + 0.05);
+        popGain.gain.setValueAtTime(0.02, time);
+        popGain.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
+        popOsc.connect(popGain);
+        popGain.connect(masterGain);
+        popOsc.start(time);
+        popOsc.stop(time + 0.1);
       }
 
       beatCount++;
-      beatRef.current = window.setTimeout(playPattern, 400); // 75 BPM - Very Chill
+      beatRef.current = window.setTimeout(playPattern, 300); // 100 BPM - Happier tempo
     };
 
     playPattern();
@@ -101,9 +115,9 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     if (isPlaying) {
-      masterGainRef.current?.gain.exponentialRampToValueAtTime(0.0001, audioContextRef.current!.currentTime + 2);
+      masterGainRef.current?.gain.exponentialRampToValueAtTime(0.0001, audioContextRef.current!.currentTime + 1);
     } else {
-      masterGainRef.current?.gain.exponentialRampToValueAtTime(0.4, audioContextRef.current!.currentTime + 2);
+      masterGainRef.current?.gain.exponentialRampToValueAtTime(0.6, audioContextRef.current!.currentTime + 1); // Increased max volume
     }
     setIsPlaying(!isPlaying);
   };

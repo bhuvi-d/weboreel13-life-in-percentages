@@ -62,14 +62,14 @@ export const Reflection = () => {
          whileInView={{ opacity: 1, y: 0 }}
          transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
          viewport={{ once: true }}
-         className="z-10 max-w-6xl w-full space-y-32"
+         className="z-10 max-w-none px-24 w-full space-y-32"
        >
          <div className="space-y-12">
            <h2 className="text-[clamp(4rem,12vw,10rem)] font-cursive text-taupe leading-tight">
              Your days become <br />
              <span className="font-signature text-muted-gold text-[1.2em]">your decades.</span>
            </h2>
-           <div className="max-w-3xl mx-auto space-y-8">
+           <div className="max-w-5xl mx-auto space-y-8">
              <p className="font-display italic text-3xl text-taupe/40">
                You still have time to shape them beautifully.
              </p>

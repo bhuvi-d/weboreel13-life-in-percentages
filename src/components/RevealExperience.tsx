@@ -39,7 +39,7 @@ const InsightSection = ({
 
   const opacity = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [0, 1, 0]);
   const scale = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [0.95, 1, 0.95]);
-  const y = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [60, 0, -60]);
+  const y = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [40, -40, -120]);
 
   return (
     <div ref={containerRef} className={`h-screen w-full sticky top-0 flex items-center justify-center overflow-hidden ${bgGradient}`}>
@@ -49,7 +49,7 @@ const InsightSection = ({
         style={{ opacity, scale, y }}
         className="relative z-10 text-center max-w-none px-24 w-full"
       >
-        <div className="flex flex-col items-center gap-16 md:gap-24">
+        <div className="flex flex-col items-center gap-10 md:gap-12">
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -58,14 +58,14 @@ const InsightSection = ({
             <Icon size={64} strokeWidth={0.5} />
           </motion.div>
           
-          <div className="space-y-10">
-            <h3 className="font-signature text-6xl md:text-8xl text-taupe italic drop-shadow-sm">
+          <div className="space-y-6">
+            <h3 className="font-signature text-5xl md:text-7xl text-taupe italic drop-shadow-sm">
               {subtitle}
             </h3>
-            <div className="text-[clamp(7rem,22vw,14rem)] font-display text-taupe font-bold tracking-tighter leading-none drop-shadow-md">
+            <div className="text-[clamp(5rem,18vw,11rem)] font-display text-taupe font-bold tracking-tighter leading-none drop-shadow-md">
               {stat}
             </div>
-            <h4 className="text-2xl md:text-3xl text-taupe font-black tracking-[0.8em] uppercase opacity-40">
+            <h4 className="text-xl md:text-2xl text-taupe font-black tracking-[0.8em] uppercase opacity-40">
               {title}
             </h4>
           </div>

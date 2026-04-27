@@ -77,10 +77,7 @@ const InsightSection = ({
           style={{ opacity }}
           className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 text-taupe z-20"
         >
-          <div className="flex flex-col items-center gap-2">
-            <span className="font-signature text-4xl text-muted-gold">Gently scroll down</span>
-            <span className="text-[10px] uppercase tracking-[0.5em] font-black opacity-30">to see more</span>
-          </div>
+
           <motion.div 
             animate={{ y: [0, 15, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
